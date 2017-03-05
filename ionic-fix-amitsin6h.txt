@@ -1,0 +1,45 @@
+```$ ionic info
+
+Your system information:
+
+ ordova CLI: 6.5.0
+Ionic Framework Version: 2.1.0
+Ionic CLI Version: 2.1.18
+Ionic App Lib Version: 2.1.9
+Ionic App Scripts Version: 1.1.3
+ios-deploy version: Not installed
+ios-sim version: Not installed
+OS: Windows 10
+Node Version: v6.9.2
+Xcode version: Not installed
+```
+
+
+
+##The below method works perfect for my ionic info
+
+###In config.xml: removed the line
+<preference name="SplashScreenDelay" value="5000" />,
+###and added
+<preference name="AutoHideSplashScreen" value="false"/>.
+
+In the app.component.ts inside constructor: added **first one** or **second one** whichever works for you
+
+**First One**
+initializeApp() {
+    this.platform.ready().then(() => {
+      Splashscreen.hide();
+    });
+}
+
+
+**Second One**
+  platform.ready().then(() => {
+      StatusBar.styleDefault();
+      Splashscreen.hide();
+    });
+    
+   
+
+###That should make the splashscreen duration depend on when the app is ready to show the root page, 
+###and not show the white screen. This also eliminates the need to hardcode the SplashScreenDelay value in the config.
